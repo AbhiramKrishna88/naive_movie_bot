@@ -124,6 +124,7 @@ def error(update,context):
 
 
 def main():
+	PORT = int(os.environ.get('PORT', '8443'))
 	updater = Updater(config('API_KEY'),use_context=True)
 	dp = updater.dispatcher
 
@@ -138,8 +139,6 @@ def main():
 	#dp.add_handler(MessageHandler(Filters.text, handle_msg))	
 	dp.add_error_handler(error)
 
-	PORT = int(os.environ.get('PORT', '8443'))
-	updater = Updater(config('API_KEY'))	
 	updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
                           url_path=config('API_KEY'),
