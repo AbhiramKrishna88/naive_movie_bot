@@ -2,8 +2,10 @@ from telegram.ext import *
 from decouple import config
 import random
 import db
+import os
 
 print("Bot started....")
+PORT = int(os.environ.get('PORT', 5000))
 
 
 def start_command(update,context):
@@ -137,7 +139,10 @@ def main():
 	#dp.add_handler(MessageHandler(Filters.text, handle_msg))	
 	dp.add_error_handler(error)
 
-	updater.start_polling()
+	updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=config('API_KEY'))
+	updater.bot.setWebhook('https://naive-movies-bot.herokuapp.com/' + config('API_KEY'))
 	updater.idle()
 
 main()
