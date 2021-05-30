@@ -142,7 +142,8 @@ def main():
 	updater = Updater(config('API_KEY'))	
 	updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
-                          url_path=config('API_KEY'))
+                          url_path=config('API_KEY'),
+                          webhook_url='https://naive-movies-bot.herokuapp.com/' + config('API_KEY'))
 	updater.idle()
 
 main()
